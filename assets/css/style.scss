@@ -4,8 +4,10 @@
     list-style: none
 }
 
-$primaryColor: #8d5d75;
-$hoverColor: darken($primaryColor, 10%);
+$primaryColor: #607D8B;
+$bodyAndBorderColor: aliceblue;
+$hoverColor: #455A64;
+$animationColor: #F9CEE7;
 
 
 @mixin displflex($alignitems: center, $justify: center) {
@@ -20,7 +22,7 @@ $hoverColor: darken($primaryColor, 10%);
     list-style: none;
 }
 
-@mixin ulPosition($top: 0, $left: 0) {
+@mixin ulPosition($top: 1px, $left: 0) {
     position: absolute;
     top: $top;
     left: $left;
@@ -33,41 +35,71 @@ $hoverColor: darken($primaryColor, 10%);
 }
 
 body {
-    background-color: aliceblue
-}
+    background-color: $bodyAndBorderColor;
 
-.nav-wrapper {
-    @include displflex;
-    max-width: 1000px;
-    margin: 40px auto;
+    .nav-wrapper {
+        @include displflex;
+        max-width: 1000px;
+        margin: 40px auto;
 
-    >.main-nav>ul {
-        @include ulfixmixin;
+        >.main-nav>ul {
+            @include ulfixmixin;
 
-        >li {
-            display: inline-block;
-            margin: 0 5px;
+            >li {
+                display: inline-block;
+                margin: 0 5px;
 
-            .dropdown {
-                @include ulPosition($top: 100%);
-            }
+                .dropdown {
+                    @include ulPosition($top: 100%);
+                }
+                >a {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        left: 0;
+                        width: 0;
+                        height: 2px;
+                        background-color: $animationColor;
+                        transition: width 1s;
+                      }
+                }
+                &:hover {
+                    >a {                                    
+                      &::before {
+                        width: 100%;
+                      }
+                        >span {
+                            transform: rotate(-180deg);
+                        }
+                    }
+                    
+                    >.dropdown {
+                        opacity: 1;
+                        visibility: visible;
+                        transform: translate(0);
 
-            &:hover {
-                >.dropdown {
-                    opacity: 1;
-                    visibility: visible;
-                    transform: translate(0);
-                    >li {
-                        &:hover {
-                            >.dropdown {
-                                opacity: 1;
-                                visibility: visible;
-                                transform: translate(0);
-                                >li:hover {
-                                    .dropdown {
-                                        opacity: 1;
-                                        visibility: visible;
-                                        transform: translate(0);
+                        >li {
+                            &:hover {
+                                >a>span {
+                                    transform: rotate(-180deg);
+                                }
+
+                                >.dropdown {
+                                    opacity: 1;
+                                    visibility: visible;
+                                    transform: translate(0);
+
+                                    >li:hover {
+                                        >a>span {
+                                            transform: rotate(-180deg);
+                                        }
+
+                                        .dropdown {
+                                            opacity: 1;
+                                            visibility: visible;
+                                            transform: translate(0);
+                                        }
                                     }
                                 }
                             }
@@ -75,26 +107,52 @@ body {
                     }
                 }
             }
-        }
 
-        li {
-            position: relative;
+            li {
+                position: relative;
 
-            >a {
-                display: block;
-                padding: 10px 18px;
-                background-color: #353b39;
-                color: #fff;
-                text-decoration: none;
-                text-transform: uppercase;
-                letter-spacing: 1px;
-            }
-            .dropdown {
+                >a {
+                    display: block;
+                    padding: 10px 18px;
+                    background-color: $primaryColor;
+                    color: #fff;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                    transition: background-color .2s linear;
+
+                    span {
+                        transition: transform .2s linear;
+                        display: inline-block;
+                    }
+
+                    &:hover {
+                        background-color: $hoverColor;
+                    }
+                }
+
                 .dropdown {
-                    @include ulPosition($left: 100%);
+                    a {
+                        position: relative;
+
+                        &:after {
+                            position: absolute;
+                            content: "";
+                            bottom: 0;
+                            left: 0;
+                            right: 0;
+                            height: 1px;
+                            background-color: $bodyAndBorderColor;
+                            opacity: .5;
+                        }
+                    }
+
+                    .dropdown {
+                        @include ulPosition($left: 100%);
+                    }
                 }
             }
         }
-    }
 
+    }
 }
