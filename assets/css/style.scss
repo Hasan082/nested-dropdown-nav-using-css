@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+$primaryColor: #8d5d75;
+$hoverColor: darken($primaryColor, 10%);
+
+
+@mixin displflex($alignitems: center, $justify: center) {
+    display: flex;
+    align-items: $alignitems;
+    justify-content: $justify;
+}
+
+@mixin ulfixmixin() {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+@mixin ulPosition($top: 0, $left: 0) {
+    position: absolute;
+    top: $top;
+    left: $left;
+    width: 150px;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(10px);
+    visibility: hidden;
+    transition: all .3s linear;
+}
+
+body {
+    background-color: aliceblue
+}
+
+.nav-wrapper {
+    @include displflex;
+    max-width: 1000px;
+    margin: 40px auto;
+
+    >.main-nav>ul {
+        @include ulfixmixin;
+
+        >li {
+            display: inline-block;
+            margin: 0 5px;
+
+            .dropdown {
+                @include ulPosition($top: 100%);
+            }
+
+            &:hover {
+                >.dropdown {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translate(0);
+                    >li {
+                        &:hover {
+                            >.dropdown {
+                                opacity: 1;
+                                visibility: visible;
+                                transform: translate(0);
+                                >li:hover {
+                                    .dropdown {
+                                        opacity: 1;
+                                        visibility: visible;
+                                        transform: translate(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        li {
+            position: relative;
+
+            >a {
+                display: block;
+                padding: 10px 18px;
+                background-color: #353b39;
+                color: #fff;
+                text-decoration: none;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+            .dropdown {
+                .dropdown {
+                    @include ulPosition($left: 100%);
+                }
+            }
+        }
+    }
+
+}
