@@ -121,8 +121,4 @@ Feel free to experiment and make changes to the HTML and CSS code to create your
 
 ## License
 
-This project is licensed under the [MIT License](link-to-license-file). You are free to use, modify, and distribute this code for both commercial and non-commercial purposes. Please see the [LICENSE](link-to-license-file) file for more details.
-
----
-
-That's it! You now have a README file explaining the 4th level dropdown menu using HTML, CSS, and animation. Feel free to update the README with any additional information or customize it further based on your specific project requirements.
+This project is licensed under the [MIT License](https://opensource.org/license/mit/). You are free to use, modify, and distribute this code for both commercial and non-commercial purposes. Please see the [LICENSE](https://opensource.org/license/mit/) file for more details.
