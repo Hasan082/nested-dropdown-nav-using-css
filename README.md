@@ -104,7 +104,7 @@ To use the 4th level dropdown menu in your project, follow these steps:
 4. Link the CSS file to your HTML file using a `<link>` tag:
 
 ```html
-<link rel="stylesheet" href="path/to/your/css/file.css">
+    <link rel="stylesheet" href="./assets/css/style.min.css">
 ```
 
 5. You can now use the 4th level dropdown menu in your project.
